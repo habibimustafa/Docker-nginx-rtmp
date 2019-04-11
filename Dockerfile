@@ -67,3 +67,10 @@ EXPOSE 8080
 
 CMD /run.sh
 
+RUN echo "http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories
+RUN apk update && apk add --update stunnel
+
+ADD ./stunnel.sh /stunnel.sh
+RUN chmod +x /stunnel.sh
+
+ENTRYPOINT ["/stunnel.sh"]
